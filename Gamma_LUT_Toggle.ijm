@@ -1,6 +1,12 @@
 var gammaApplied = false;
 var origReds, origGreens, origBlues;
 macro "Gamma LUT Toggle Action Tool - C000T4b12γ" {
+
+    if (nImages == 0) {
+        showMessage("Error", "No image open.");
+        exit();
+    }
+
     // Check if image is RGB
     if (bitDepth() == 24) {
         showMessage("Error", "This tool does not work with RGB images.\nPlease convert to grayscale first (Image > Type > 8-bit).");
