@@ -1,3 +1,7 @@
+// Sam Lord 2026
+// https://github.com/samjlord/Gamma_LUT_Toggle
+// Version 1.1
+
 var gammaApplied = false;
 var origReds, origGreens, origBlues;
 macro "Gamma LUT Toggle Action Tool - C000T4b12γ" {
