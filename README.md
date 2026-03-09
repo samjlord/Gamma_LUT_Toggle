@@ -8,3 +8,4 @@ Figure 1. The Gamma_LUT_Toggle tool in Fiji nondestructively toggles between a L
 <img src="gamma off on.png" alt="gamma off on">
 Figure 2. Left is gamma = 1 and right is after gamma correction of gamma = 0.45. Gamma correction compensates for the computer monitor’s inherent gamma. The effect is that dim objects are no longer lost in the background and bright objects are not as saturated.
 
+See the ImageJ/Fiji update site here: https://sites.imagej.net/Gamma_LUT_Toggle/
