@@ -4,7 +4,7 @@
 
 var gammaApplied = false;
 var origReds, origGreens, origBlues;
-macro "Gamma LUT Toggle Action Tool - C000T4b12γ" {
+macro "Gamma LUT Toggle Action Tool - C000T4b12y" {
 
     if (nImages == 0) {
         showMessage("Error", "No image open.");
