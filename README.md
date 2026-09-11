@@ -3,7 +3,7 @@ Makes a button in the Fiji toolbar with a greek gamma symbol. When you click the
 
 To install it in Fiji, go to Help->Update… and select “Manage Update Sites, then check the box next to “Gamma_LUT_Toggle” and restart Fiji. The function will appear under the red >> symbol on the Fiji toolbar and will add a button with a small gamma (γ) symbol. When you click the button, it will apply a nondestructive gamma of 0.45 by remapping the LUT while maintaining the underlying pixel values. Clicking the button a second time will toggle the image back to the original linear LUT. It works with grayscale as well as single-color LUTs.
 
-If you right-click on the gamma tool icon, you can input an arbitrary gamma value.
+If you shift-click on the gamma tool icon, you can input an arbitrary gamma value.
 
 <img src="Gamma_LUT_Toggle.png" alt="ImageJ toolbar">
 Figure 1. The Gamma_LUT_Toggle tool in Fiji nondestructively toggles between a LUT with gamma of 0.45 and 1.
