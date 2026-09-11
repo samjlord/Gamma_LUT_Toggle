@@ -1,9 +1,9 @@
 // Sam Lord 2026
 // https://github.com/samjlord/Gamma_LUT_Toggle
-// Version 2.0
+// Version 2.2
 //
-//   left-click  the tool icon : toggle the gamma LUT on / off
-//   right-click the tool icon : enter an arbitrary gamma and apply it (relative to linear)
+//   click       the tool icon : toggle the gamma LUT on / off
+//   shift-click the tool icon : enter an arbitrary gamma and apply it
 
 
 var gammaValue   = 0.45;      // current gamma exponent
@@ -13,6 +13,12 @@ var origReds, origGreens, origBlues;
 
 
 macro "Gamma LUT Toggle Action Tool - C000T4b12y" {
+
+    if (isKeyDown("shift")) {
+        setKeyDown("none");
+        setGamma();
+        exit();
+    }
 
     if (!imageOK()) exit();
 
@@ -25,7 +31,7 @@ macro "Gamma LUT Toggle Action Tool - C000T4b12y" {
         gammaImageID = getImageID();
         applyGamma(gammaValue);
         gammaApplied = true;
-        showStatus("Gamma " + d2s(gammaValue, 3) + " ON");
+        showStatus("Gamma " + d2s(gammaValue, 2) + " ON");
 
     } else {
         setLut(origReds, origGreens, origBlues);
@@ -35,12 +41,13 @@ macro "Gamma LUT Toggle Action Tool - C000T4b12y" {
 }
 
 
-macro "Gamma LUT Toggle Action Tool Options" {
+// Asks for a gamma and applies it to the original LUT. Never compounds: the LUT
+// is returned to linear first, so reopening this dialog re-applies from scratch.
+function setGamma() {
 
     Dialog.create("Gamma LUT Toggle");
-    Dialog.addNumber("Gamma:", gammaValue, 3, 8, "");
-    Dialog.addMessage("Applied to the original LUT, never compounded:\n"
-                    + "the LUT is returned to linear first.\n \n"
+    Dialog.addNumber("Gamma:", gammaValue, 2, 8, "");
+    Dialog.addMessage("Applied to the original LUT, never compounded.\n \n"
                     + "0.45 = sRGB-like encoding.    1.0 = linear, uncorrected.");
     Dialog.show();                                  // Cancel aborts the macro
 
@@ -53,11 +60,11 @@ macro "Gamma LUT Toggle Action Tool Options" {
 
     // Nothing to act on yet -- keep the value for the next click.
     if (nImages == 0) {
-        showStatus("Gamma set to " + d2s(gammaValue, 3) + " (no image open)");
+        showStatus("Gamma set to " + d2s(gammaValue, 2) + " (no image open)");
         exit();
     }
     if (bitDepth() == 24) {
-        showStatus("Gamma set to " + d2s(gammaValue, 3) + " (RGB - convert to 8-bit)");
+        showStatus("Gamma set to " + d2s(gammaValue, 2) + " (RGB - convert to 8-bit)");
         exit();
     }
 
@@ -70,7 +77,7 @@ macro "Gamma LUT Toggle Action Tool Options" {
     }
     applyGamma(gammaValue);
     gammaApplied = true;
-    showStatus("Gamma " + d2s(gammaValue, 3) + " ON");
+    showStatus("Gamma " + d2s(gammaValue, 2) + " ON");
 }
 
 
@@ -98,13 +105,4 @@ function imageOK() {
         return false;
     }
     return true;
-}
-
-        
-    } else {
-        // Restore original LUT
-        setLut(origReds, origGreens, origBlues);
-        gammaApplied = false;
-        showStatus("Gamma 1.0 (original)");
-    }
 }
